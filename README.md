@@ -345,3 +345,41 @@ oSave and exit the editor.
 2.Restart SSH Service:
 oRestart the SSH service to apply the changes:
 osudo systemctl restart ssh
+
+
+
+
+
+
+6. *Test Remote Access:*
+   - Each group member should test remote access to the Linux VM using SSH.
+   - Troubleshoot and resolve any connection issues.
+
+7. *Monitoring and Logging: *
+   - Enable and configure logging on the Linux VM to track remote access attempts (syslog or other logging service).
+   - Monitor the logs for any unauthorized access attempts and document the findings.
+Solution
+Enable and Configure Syslog for SSH Logging
+The default logging system on most Linux distributions is syslog, which logs system events, including remote access attempts via SSH.
+Step 1. Check if rsyslog is installed
+Run the following command to check if rsyslog is installed and running:
+
+```
+sudo systemctl status rsyslog
+
+```
+If it's not installed, you can install it using:
+
+```
+sudo apt update
+sudo apt install rsyslog
+
+```
+
+Step 2. Check SSH Logging in Syslog
+By default, SSH logs are sent to `/var/log/auth.log` on Debian-based systems (e.g., Ubuntu). You can monitor this log for SSH access attempts:
+```
+sudo tail -f /var/log/auth.log
+
+```
+This log file will show all SSH login attempts, including both successful and unsuccessful logins.
